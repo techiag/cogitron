@@ -3,15 +3,16 @@ from timeit import default_timer as timer
 import time
 
 class Task(ABC):
-    def __init__(self, cogref):
+    def __init__(self, cogref, debug_msg=None):
         self.cogref = cogref
         self.exec_time = -1
+        self.debug_msg = debug_msg
 
     def execute(self):
         start = timer()
         self.exec_body()
         end = timer()
-        self.exec_time = end - start 
+        self.exec_time = end - start
 
     @abstractmethod
     def exec_body(self):
