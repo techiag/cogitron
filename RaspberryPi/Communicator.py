@@ -9,6 +9,7 @@ class Communicator(object):
             self.com = emu.Serial(9600)
         elif communicator == "real":
             self.com = real.Serial("/dev/tty.usbmodem14101", 9600)
+            
 
     def sendMessage(self, message):
         messageToBytes = bytes(message, 'utf-8')
@@ -25,7 +26,11 @@ class Communicator(object):
             letter = chr(byteReceived)
             if(letter != ""):
                 messageReceived += letter
-        return messageReceived
+
+        if messageReceived != "":
+            return messageReceived
+        else:
+            return -1
 
 
 if __name__ == "__main__":
@@ -36,6 +41,8 @@ if __name__ == "__main__":
     messageOut = "driveForward" #the message to send to arduino
     
     while True:
-        print(bob.receiveMessage()) 
         bob.sendMessage(messageOut)
+        messageIn = bob.receiveMessage()
+        if messageIn != -1:
+            print(messageIn)
 
