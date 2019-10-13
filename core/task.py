@@ -27,3 +27,8 @@ class TaskShutdown(Task):
     def exec_body(self):
         print('Shutting down.')
         self.cogref.shutdown = True
+    
+class TaskFaceDetect(Task):
+    def exec_body(self):
+        print('saw a face!')
+        time.sleep(10)
