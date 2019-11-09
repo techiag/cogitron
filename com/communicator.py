@@ -3,7 +3,7 @@ import serial as real
 import time
 
 class Communicator(object):
-    def __init__(self, communicator):
+    def __init__(self, communicator, motorUSB, sensorUSB):
         '''Sets up either emulator serial or serial connection
         to real devices'''
 
@@ -12,22 +12,22 @@ class Communicator(object):
             #self.com = emu.Serial(9600)
         elif communicator == "real":
             self.con_nodes = []
-            self.deviceHash = {"Motor" : 0, "Sensor" : 1}
+            self.deviceHash = {"MotorSerial" : 0, "SensorSerial" : 1}
 
             '''Create a connection to each slave'''
-            self.motor = real.Serial("/dev/cu.usbmodem14101", 9600)
-            self.sensor = real.Serial("/dev/tty.usbmodem14201", 9600)
+            self.motor_serial = real.Serial(motorUSB, 9600)
+            self.sensor_serial = real.Serial(sensorUSB, 9600)
 
             '''Add connected slaves to list'''
-            self.con_nodes.append(self.motor)
-            self.con_nodes.append(self.sensor)
+            self.con_nodes.append(self.motor_serial)
+            self.con_nodes.append(self.sensor_serial)
 
     def getConnection(self, string):
         '''Return the right connection based on string'''
         if (string.lower() == "motor"):
-            return self.con_nodes[self.deviceHash["Motor"]]
+            return self.con_nodes[self.deviceHash["MotorSerial"]]
         elif (string.lower() == "sensor"):
-            return self.con_nodes[self.deviceHash["Sensor"]]
+            return self.con_nodes[self.deviceHash["SensorSerial"]]
 
 
     def sendMessage(self,connection, message):
@@ -47,14 +47,3 @@ class Communicator(object):
                 messageReceived += letter
         return messageReceived
 
-if __name__ == "__main__":
-    '''The emulator is not working, especially because there is not attribute in_waiting in emulator, to tell the buffer size
-    Real serial connection works'''
-
-    bob = Communicator("real")  # instance of Communicator
-    messageOut = "setMotors;1;2;2"  # the message to send to arduino
-
-    while True:
-        print(bob.receiveMessage(bob.getConnection("motor")))
-        messageOut = input("\nenter command\n")
-        bob.sendMessage(messageOut)
