@@ -1,4 +1,4 @@
-import fakeSerial as emu
+import com.fakeserial as emu
 import serial as real
 import time
 
@@ -8,20 +8,22 @@ class Communicator(object):
         if communicator == "emu":
             self.com = emu.Serial(9600)
         elif communicator == "real":
-            self.com = real.Serial("/dev/tty.usbmodem14101", 9600)
-
+            self.com = real.Serial("/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_95437313834351405121-if00", 9600)
+            #self.com = real.Serial("/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_A413936393135141C002-if00", 9600)
+            #self.com = real.Serial("/dev/tty.usbmodem14101", 9600)
+    
     def sendMessage(self, message):
         messageToBytes = bytes(message, 'utf-8')
         self.com.write(messageToBytes)
-
 
     def receiveMessage(self):
         messageReceived = ""
         
         time.sleep(0.5) # in_waiting won't work without this time sleep.
        
-        while self.com.in_waiting >0:
+        while self.com.in_waiting > 0:
             byteReceived = ord(self.com.read())
+            #print(byteReceived)
             letter = chr(byteReceived)
             if(letter != ""):
                 messageReceived += letter
