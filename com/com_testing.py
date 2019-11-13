@@ -6,10 +6,10 @@ if __name__ == "__main__":
     motorUSB = "/dev/cu.usbmodem14101"
     sensorUSB = "/dev/tty.usbmodem14201"
 
-    bob = Communicator(motorUSB, sensorUSB)  # instance of Communicator
+    bob = Communicator(motorUSB)  # instance of Communicator
     messageOut = "setMotor;1;2"  # the message to send to arduino
 
     while True:
-        messageOut = input("\nenter command\n")
-        bob.sendMessage(bob.getConnection("motor"), messageOut)
+        #messageOut = input("\nenter command\n")
+        #bob.sendMessage(bob.getConnection("motor"), messageOut)
         print(bob.receiveMessage(bob.getConnection("motor")))
