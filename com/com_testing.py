@@ -10,6 +10,6 @@ if __name__ == "__main__":
     messageOut = "setMotor;1;2"  # the message to send to arduino
 
     while True:
-        #messageOut = input("\nenter command\n")
-        #bob.sendMessage(bob.getConnection("motor"), messageOut)
+        messageOut = input("\nenter command\n")
+        bob.sendMessage(bob.getConnection("motor"), messageOut)
         print(bob.receiveMessage(bob.getConnection("motor")))

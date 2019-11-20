@@ -11,8 +11,8 @@ class Communicator(object):
         self.deviceHash = {"MotorSerial" : 0, "SensorSerial" : 1}
 
         '''Create a connection to each slave'''
-        self.motor_serial = real.Serial(motorUSB, 115200)# if motorUSB is not "emu" else emu.Serial(9600)
-        #self.sensor_serial = real.Serial(sensorUSB, 9600)if motorUSB is not "emu" else emu.Serial(9600)
+        self.motor_serial = real.Serial(motorUSB, 9600)# if motorUSB is not "emu" else emu.Serial(9600)
+        #self.sensor_serial = real.Serial(sensorUSB, 115200)if motorUSB is not "emu" else emu.Serial(9600)
 
         '''Add connected slaves to list'''
         self.con_nodes.append(self.motor_serial)
