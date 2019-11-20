@@ -24,6 +24,7 @@ class Serial:
         self._isOpen = True
         self._receivedData = ""
         self._data = "It was the best of times.\nIt was the worst of times.\n"
+        self.in_waiting = 0
 
     # isOpen()
     # returns True if the port to the Arduino is open.  False otherwise
