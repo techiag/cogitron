@@ -1,4 +1,4 @@
-import fakeserial as emu
+import com.fakeserial as emu
 import serial as real
 import time
 
@@ -12,11 +12,11 @@ class Communicator(object):
 
         '''Create a connection to each slave'''
         self.motor_serial = real.Serial(motorUSB, 9600)# if motorUSB is not "emu" else emu.Serial(9600)
-        #self.sensor_serial = real.Serial(sensorUSB, 115200)if motorUSB is not "emu" else emu.Serial(9600)
+        self.sensor_serial = real.Serial(sensorUSB, 115200)if motorUSB is not "emu" else emu.Serial(9600)
 
         '''Add connected slaves to list'''
         self.con_nodes.append(self.motor_serial)
-        #self.con_nodes.append(self.sensor_serial)
+        self.con_nodes.append(self.sensor_serial)
 
 
     def getConnection(self, string):

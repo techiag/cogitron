@@ -7,18 +7,28 @@ class Cogitron:
     def __init__(self, emulate_hardware=False, verbose=False):
         self.shutdown = False
         self.verbose = verbose
-        self.com = Communicator('real')
+        self.com = Communicator(motorUSB="/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_95437313834351405121-if00", sensorUSB="/dev/serial/by-id/usb-Arduino__www.arduino.cc__0042_85332313036351610102-if00")
 
-        time.sleep(2)
+        """time.sleep(2)
         while True:
             msg = 'setMotor;0;80'
             print('sending', msg)
-            self.com.sendMessage(msg)
+            self.com.sendMessage(self.com.motor, msg)
             time.sleep(0.2)
         
             msg = 'setMotor;0;0'
             print('sending', msg)
-            self.com.sendMessage(msg)
+            self.com.sendMessage(self.com.motor, msg)
+            time.sleep(0.2)
+
+            msg = 'setMotor;1;80'
+            print('sending', msg)
+            self.com.sendMessage(self.com.motor, msg)
+            time.sleep(0.2)
+        
+            msg = 'setMotor;1;0'
+            print('sending', msg)
+            self.com.sendMessage(self.com.motor, msg)
             time.sleep(0.2)
         
         #msg = 'setMotors;80;80;0'
@@ -31,7 +41,7 @@ class Cogitron:
             rec = self.com.receiveMessage()
             #print('received {} (len={})'.format(bytes(rec, 'utf-8'), len(rec)))
             print('received {} (len={})'.format(rec, len(rec)))
-
+        """
         self.tasks = Queue()
         """
         def task_spam(cog):
