@@ -1,0 +1,11 @@
+Hva mangler tilstandsmaskinen? 
+- Foreløpig er det kun laget tilstander for kjøring og samtaler
+- mangler en del overganger mellom tilstandene i kjørings-tilstanden
+- Hodebevegelser
+- Armbevegelser 
+- bilde/syn 
+- sensorer 
+    - hvordan roboten reagerer når ulike data fra sensorer kommer inn 
+    - hva er indikatorene for at roboten skal snu og hvor den skal kjøre 
+- overgang mellom sub-tilstandene 
+- 

@@ -3,7 +3,8 @@ from transitions.extensions import HierarchicalGraphMachine as Machine
 
 
 class robot(object):
-    pass 
+    def new_state(self): 
+        print('Hello, new state')
 
 
 states = ['idle', 'begin', {'name': 'driving', 'children': ['forward', 'reversing',
@@ -42,7 +43,8 @@ transitions = [['power', 'off', 'idle'],
 Cogitron = robot()
 machine = Machine(model=Cogitron, use_pygraphviz=False, states=states, transitions=transitions, initial='off')
 
+machine.on_enter_idle('new_state')
 Cogitron.power()
-Cogitron.pyrosense()
+
 
 Cogitron.get_graph().draw('my_state_diagram.png', prog='dot')
